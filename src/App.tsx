@@ -20,16 +20,14 @@ export class App extends React.Component<{}, AppState> {
     this.setState({ hasClock: true });
   };
 
-  hideClock = () => {
+  hideClock = (event: MouseEvent) => {
+    event.preventDefault();
     this.setState({ hasClock: false });
   };
 
   componentDidMount(): void {
     document.addEventListener('click', this.showClock);
-    document.addEventListener('contextmenu', event => {
-      event.preventDefault();
-      this.hideClock();
-    });
+    document.addEventListener('contextmenu', this.hideClock);
 
     this.nameTimerId = window.setInterval(() => {
       this.setState({
